@@ -1,1 +1,1 @@
-** Flash News
+**Flash News
