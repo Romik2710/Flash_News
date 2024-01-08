@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CDN LINKS -->
+    <link href='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css' rel='stylesheet'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'></script>
+    <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Flash News</title>
+</head>
+
+<body>
+
+    <!-- NAV BAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand">FLashNews</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'indexfile' %}">Home</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="{% url 'indexfile' %}" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Categories</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{% url 'allnewsfile' %}">All News</a></li>
+                            <li><a class="dropdown-item" href="{% url 'topnewsfile' %}">Top News</a></li>
+                            <li><a class="dropdown-item" href="{% url 'trendingnewsfile' %}">Trending News</a></li>
+                            <li><a class="dropdown-item" href="{% url 'sciencenewsfile' %}">Science News</a></li>
+                            <li><a class="dropdown-item" href="{% url 'entertainmentnewsfile' %}">Entertainment News</a></li>
+                            <li><a class="dropdown-item" href="{% url 'sportsnewsfile' %}">Sports News</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <form class="d-flex">
+                    <a href="{% url 'signinfile' %}" class="btn btn-light my-2 my-sm-0">Sign in</a>
+                    <span style="margin-right: 10px;"></span>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- NAV SCROLL -->
+    <div class="container">
+        <div class="nav-scroller py-1 mb-3 border-bottom">
+            <nav class="nav nav-underline justify-content-center justify-content-md-between">
+                <a class="nav-item nav-link link-body-emphasis active" href="{% url 'allnewsfile' %}">All News</a>
+                <a class="nav-item nav-link link-body-emphasis" href="{% url 'topnewsfile' %}">Top News</a>
+                <a class="nav-item nav-link link-body-emphasis" href="{% url 'trendingnewsfile' %}">Trending News</a>
+                <a class="nav-item nav-link link-body-emphasis" href="{% url 'sciencenewsfile' %}">Science News</a>
+                <a class="nav-item nav-link link-body-emphasis" href="{% url 'entertainmentnewsfile' %}">Entertainment News</a>
+                <a class="nav-item nav-link link-body-emphasis" href="{% url 'sportsnewsfile' %}">Sports News</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- CARDS -->
+    <div class="container py-2">
+    <div class="row">
+        <div class="col-12">
+            <h3 class="mb-3">Sports News</h3>
+        </div>
+    </div>
+    <div class="row">
+        {% for data in sportsdata.data %}
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <img class="card-img-top" src="{{ data.imageUrl }}" alt="Article Image">
+                <div class="card-body">
+                    <h5 class="card-title">{{ data.title }}</h5>
+                    <p class="card-text">{{ data.content }}</p>
+                    <a href="{{ data.readMoreUrl }}" class="btn btn-outline-primary btn-sm">Read More</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-center text-white">
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2023 Copyright:
+            <a class="text-white" href="{% url 'indexfile' %}">FlashNews.com</a>
+        </div>
+    </footer>
+
+</body>
+
+</html>
